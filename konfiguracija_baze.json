@@ -1,0 +1,7 @@
+{
+  "server": "localhost",
+  "korisnik": "root",
+  "lozinka": "",
+  "baza": "inspekcija",
+  "kodiranje": "utf8mb4"
+}

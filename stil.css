@@ -1,0 +1,421 @@
+/*
+CRC: stil.css
+Klasa/fajl: stil
+Odgovornosti: definiše izgled aplikacije (tamna pozadina, bele kartice, forme, tabele, dugmad, filteri)
+Saradnici: sve HTML/PHP stranice (prijava, pocetna, admin, inspektor, izmeni_prijavu, moje_prijave, pregled, stampaj, transakcija)
+*/
+
+/* Osnovno */
+:root{
+  --bg:#2c3e50;
+  --card:#ffffff;
+  --text:#000000;
+  --text-invert:#ffffff;
+  --muted:#555;
+  --border:#ddd;
+  --accent:#0077cc;
+  --accent-dark:#005fa3;
+  --danger:#c62828;
+  --success:#2e7d32;
+  --table-head:#f0f0f0;
+  --shadow:0 0 10px rgba(0,0,0,0.3);
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+
+body {
+  font-family:Arial, sans-serif;
+  background:var(--bg);
+  margin:0;
+  color:var(--text);
+}
+
+/* Header i navigacija */
+header{
+  position:relative;
+  padding:16px 20px;
+  color:var(--text-invert);
+}
+header .welcome{
+  text-align:center;
+  font-size:24px;
+  margin:0;
+  color:var(--text-invert);
+}
+header nav{
+  position:fixed;
+  top:16px;
+  right:20px;
+  z-index:1000;
+}
+header nav a,
+header nav a:visited{
+  color:#ffffff;
+  text-decoration:none;
+  font-weight:bold;
+  margin-left:16px;
+}
+header nav a:hover{ text-decoration:underline; }
+
+/* Kartica/kontejner */
+.kontejner {
+  width:90%;
+  max-width:1100px;
+  margin:100px auto 40px;
+  background:var(--card);
+  color:var(--text);
+  padding:24px;
+  border-radius:10px;
+  box-shadow:var(--shadow);
+}
+.kontejner.uska{ max-width:700px; }
+.kontejner.mala{ max-width:520px; }
+
+h1,h2{ color:#000; }
+h2{ text-align:center; margin-bottom:20px; }
+
+.kontejner:has(form[action="pocetna.php"]) > h1,
+.kontejner:has(#slika) > h1 {
+  text-align: center;
+  width: 100%;
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+/* Forme i polja */
+label{ display:block; margin-top:10px; font-weight:bold; }
+input[type="text"],
+input[type="password"],
+input[type="number"],
+input[type="date"],
+select,
+textarea,
+button{
+  width:100%;
+  padding:10px;
+  margin-top:6px;
+  border:1px solid #ccc;
+  border-radius:6px;
+  background:#fff;
+  color:#000;
+}
+textarea{ resize:vertical; }
+
+button,
+.dugme{
+  width:100%;
+  display:inline-block;
+  background:var(--accent);
+  color:#fff;
+  border:none;
+  padding:11px 14px;
+  border-radius:6px;
+  cursor:pointer;
+  font-weight:bold;
+  text-decoration:none;
+}
+button:hover,.dugme:hover{ background:var(--accent-dark); }
+.dugme.sivo{ background:#555; }
+.dugme.zeleno{ background:#0a8a1f; }
+
+/* Grid filter forma (admin/inspektor) */
+form.filtri{
+  display:grid;
+  grid-template-columns:repeat(5, minmax(0,1fr));
+  gap:16px;
+  align-items:end;
+  margin-bottom:15px;
+}
+form.filtri label{
+  font-weight:bold;
+  font-size:13px;
+  margin-bottom:6px;
+  color:#222;
+}
+form.filtri input, form.filtri select{ background:#fff; color:#000; }
+
+/* Dugmici filtera */
+form.filtri .dugmici{
+  grid-column:1 / -1;
+  display:flex;
+  justify-content:flex-start;
+  gap:12px;
+  align-items:baseline;
+  margin-top:8px;
+}
+form.filtri .dugmici > *{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  height:42px;
+  line-height:1;
+  padding:0 16px;
+  border-radius:6px;
+  width:auto;
+  font-weight:700;
+}
+form.filtri .dugmici > *:first-child{
+  flex:1;
+  background:var(--accent);
+  color:#fff;
+  border:none;
+}
+form.filtri .dugmici > *:first-child:hover{ background:var(--accent-dark); }
+form.filtri .dugmici > *:nth-child(2){
+  background:#6c757d;
+  color:#fff;
+  border:none;
+}
+form.filtri .dugmici > *:nth-child(3){
+  background:#2e7d32;
+  color:#fff;
+  border:none;
+}
+form.filtri .dugmici > *:nth-child(2):hover,
+form.filtri .dugmici > *:nth-child(3):hover{ filter:brightness(1.05); }
+
+/* Uniformni izgled filter polja */
+form.filtri input[type="text"],
+form.filtri input[type="date"],
+form.filtri select {
+  height: 40px;
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+  background: #fff;
+  color: #000;
+  font: inherit;
+  line-height: 1.2;
+}
+form.filtri input[type="date"] {
+  -webkit-appearance: none;
+  appearance: none;
+  padding-right: 10px;
+  min-width: 0;
+}
+form.filtri input[type="number"]::-webkit-outer-spin-button,
+form.filtri input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+form.filtri input[type="number"] { -moz-appearance: textfield; }
+form.filtri ::placeholder { color: #777; opacity: 1; }
+
+/* Registracija – ujednači izgled sa ostalim filter poljima */
+form.filtri #registracija,
+form.filtri input#registracija[type="text"]{
+  height: 40px;
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: #fff;
+  color: #000;
+  font: inherit;
+  line-height: 1.2;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/* (opciono) placeholder isti kao kod ostalih */
+form.filtri #registracija::placeholder{
+  color:#777;
+  opacity:1;
+}
+
+
+/* Tabele */
+table{
+  width:100%;
+  border-collapse:collapse;
+  background:#fff;
+  color:#000;
+  border-radius:10px;
+  overflow:hidden;
+  box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+th,td{
+  border:1px solid var(--border);
+  padding:10px;
+  text-align:left;
+  vertical-align:top;
+}
+th{ background:var(--table-head); }
+.thumb{ max-width:90px; max-height:70px; border-radius:4px; display:inline-block; }
+
+/* Badges */
+.badge{
+  display:inline-block;
+  padding:4px 8px;
+  border-radius:6px;
+  font-size:12px;
+  color:#fff;
+}
+.badge.visok{ background:var(--danger); }
+.badge.normalan{ background:#607d8b; }
+
+/* Poruke */
+.greska,.greska-box{
+  background:var(--danger);
+  color:#fff;
+  padding:10px;
+  border-radius:6px;
+  text-align:center;
+  margin-bottom:10px;
+}
+.uspeh,.uspeh-box{
+  background:var(--success);
+  color:#fff;
+  padding:10px;
+  border-radius:6px;
+  text-align:center;
+  margin-bottom:10px;
+}
+
+/* Početna forma */
+.custom-file-upload{
+  display:inline-block;
+  padding:10px 14px;
+  background:var(--accent);
+  color:#fff;
+  border-radius:6px;
+  cursor:pointer;
+  user-select:none;
+
+}
+.custom-file-upload:hover{ background:var(--accent-dark); }
+.fajl-kutija {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 1px; 
+}
+
+#ime-fajla {
+  font-size: 12px;
+  color: #555;
+  line-height: 0;       
+  margin-top: 8px;      
+}
+
+#slika{ display:none; }
+
+/* Login */
+.login-box{
+  width:400px;
+  margin:200px auto;
+  background:#fff;
+  padding:30px 40px;
+  border-radius:10px;
+  box-shadow:var(--shadow);
+}
+.login-box h2{ color:#000; text-align:center; margin-bottom:30px; }
+.login-box .error{ color:#d00; font-size:14px; text-align:center; }
+
+/* Modal */
+.modal{
+  display:none;
+  position:fixed;
+  z-index:9999;
+  inset:0;
+  background:rgba(0,0,0,0.9);
+}
+.modal img{
+  max-width:90%;
+  max-height:90%;
+  position:absolute;
+  top:50%; left:50%;
+  transform:translate(-50%,-50%);
+}
+.modal .zatvori{
+  position:absolute; top:16px; right:24px;
+  font-size:32px; color:#fff; cursor:pointer;
+}
+
+/* Dugmad štampa/nazad */
+.kontrole{
+  display:flex;
+  gap:10px;
+  justify-content:flex-end;
+  margin-bottom:12px;
+}
+.btn{ background:#222; color:#fff; border:none; padding:8px 12px; border-radius:4px; cursor:pointer; text-decoration:none; }
+.btn.svetlo{ background:#666; }
+
+/* Logo */
+#Logo{ position:fixed; bottom:10px; right:10px; width:140px; }
+
+/* Pomoćne klase */
+.prazno{ text-align:center; margin-top:50px; color:#fff; }
+
+/* Print */
+@media print{
+  body{ background:#fff !important; color:#000 !important; }
+}
+
+/* Moje prijave – layout */
+.page-title {
+  text-align: center;
+  font-size: 34px;
+  font-weight: 700;
+  margin: 24px 0 16px;
+  color: #ffffff;
+}
+.moje-prijave-wrapper {
+  width: 92%;
+  max-width: 1300px;
+  margin: 0 auto 48px;
+  background: var(--card);
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  padding: 0;
+}
+.moje-prijave-wrapper table {
+  border-radius: 0;
+  box-shadow: none;
+  margin: 0;
+}
+
+/* Globalna navigacija */
+nav {
+  position: fixed;
+  top: 16px;
+  right: 20px;
+  z-index: 9999;
+}
+nav a,
+nav a:link,
+nav a:visited,
+nav a:active {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: bold;
+  margin-left: 16px;
+}
+nav a:hover {
+  text-decoration: underline;
+  color: #ffffff;
+}
+
+/* Registracija – razmak desno kao i kod ostalih polja */
+form.filtri input#registracija,
+form.filtri #registracija{
+  margin-right:16px !important;
+  max-width:100%;
+  box-sizing:border-box;
+}
+
+/* Nazad na pregled */
+.vrati {
+  display: inline-block;
+  margin-top: 20px; 
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: bold;
+}
+.vrati:hover {
+  text-decoration: underline;
+}

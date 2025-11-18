@@ -1,0 +1,12 @@
+{
+  "prozor_duplikata_sati": 24,
+  "kriticne_opstine_prioritet": ["Stari Grad", "Savski Venac", "Vračar", "Novi Beograd"],
+  "kljucne_reci_visok_prioritet": [
+    "hitno",
+    "vatrogasni",
+    "hitna pomoć",
+    "invalidsko mesto",
+    "autobuska stanica",
+    "pešački prelaz"
+  ]
+}

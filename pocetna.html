@@ -1,0 +1,59 @@
+<!--
+CRC: pocetna.html
+Klasa/fajl: pocetna
+Odgovornosti: početna stranica aplikacije, nudi ulaz korisnicima (login link, osnovne informacije)
+Saradnici: prijava.php, stil.css, skripta.js
+-->
+
+
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Inspekcijski nadzor – Nepropisno parkiranje</title>
+  <link rel="stylesheet" href="stil.css" />
+</head>
+<body>
+  <div class="kontejner">
+    <h1>Prijava nepropisnog parkiranja</h1>
+
+    <form id="forma-prijava" novalidate>
+      <div class="polje">
+        <label for="mesto">Mesto:</label>
+        <select id="mesto" name="mesto">
+          <option value="">-- Učitavanje... --</option>
+        </select>
+      </div>
+
+      <div class="polje">
+        <label for="adresa">Adresa:</label>
+        <input type="text" id="adresa" name="adresa" />
+      </div>
+
+      <div class="polje">
+        <label for="registracija">Registarski broj vozila:</label>
+        <input type="text" id="registracija" name="registracija" />
+      </div>
+
+      <div class="polje">
+        <label for="opis">Opis problema:</label>
+        <textarea id="opis" name="opis" rows="4"></textarea>
+      </div>
+
+      <div class="fajl-kutija">
+        <label for="slika" class="custom-file-upload">Izaberi fotografiju</label>
+        <input type="file" id="slika" name="slika" accept="image/*" />
+        <span id="ime-fajla">Fotografija nije izabrana</span>
+      </div>
+
+      <button type="submit">Pošalji prijavu</button>
+    </form>
+
+    <div id="potvrda"></div>
+  </div>
+
+  <img id="Logo" src="Logo.png" alt="Nepropisno parkiranje" width="400" />
+  <script src="skripta.js"></script>
+</body>
+</html>
